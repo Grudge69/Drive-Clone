@@ -1,8 +1,6 @@
 (function () {
-  // select the html element that has an id="myFirstButton" and store in a variable called btn
   let btnAddFolder = document.querySelector("#addFolder");
   let btnAddTextFile = document.querySelector("#addTextFile");
-  //  retrieving div bread crumb from html
   let divBreadCrumb = document.querySelector("#breadcrumb");
 
   let divApp = document.querySelector("#app");
@@ -10,6 +8,7 @@
   let divAppTitle = document.querySelector("#app-title");
   let divAppMenuBar = document.querySelector("#app-menu-bar");
   let divAppBody = document.querySelector("#app-body");
+  let appClose = document.querySelector("#app-close");
 
   let aRootPath = divBreadCrumb.querySelector("a[purpose='path']");
   let divContainer = document.querySelector("#container");
@@ -21,6 +20,15 @@
   btnAddFolder.addEventListener("click", addFolder);
   btnAddTextFile.addEventListener("click", addTextFile);
   aRootPath.addEventListener("click", viewFolderFromPath);
+  appClose.addEventListener("click", closeApp);
+
+  function closeApp() {
+    //reset everything in app
+    divAppTitle.innerHTML = "title will come here";
+    divAppTitle.setAttribute("rid", "");
+    divAppMenuBar.innerHTML = "";
+    divAppBody.innerHTML = "";
+  }
 
   function addFolder() {
     let rname = prompt("Enter folder's name");
@@ -343,6 +351,8 @@
     let inputTextColor = divAppMenuBar.querySelector("[action=fg-color]");
     let selectFontFamily = divAppMenuBar.querySelector("[action=font-family]");
     let selectFontSize = divAppMenuBar.querySelector("[action=font-size]");
+    let spanDownload = divAppMenuBar.querySelector("[action=download]");
+    let inputUpload = divAppMenuBar.querySelector("[action=upload]");
     let textArea = divAppBody.querySelector("textArea");
 
     //fire events on click or change accordingly
@@ -354,6 +364,8 @@
     inputTextColor.addEventListener("change", changeNotepadTextColor);
     selectFontFamily.addEventListener("change", changeNotepadFontFamily);
     selectFontSize.addEventListener("change", changeNotepadFontSize);
+    spanDownload.addEventListener("click", downloadNotepad);
+    inputUpload.addEventListener("change", uploadNotepad);
 
     //setting initial values according to the data we have present in storage
     //if it was bold earlier then it will be bold again on clicking view as the changes were saved
@@ -379,6 +391,81 @@
     inputTextColor.dispatchEvent(new Event("change"));
     selectFontFamily.dispatchEvent(new Event("change"));
     selectFontSize.dispatchEvent(new Event("change"));
+  }
+
+  function downloadNotepad() {
+    let fid = parseInt(divAppTitle.getAttribute("rid")); //resource id to be downloaded
+    let resource = resources.find((r) => r.rid == fid); //find that resource in resources folder
+    let divNotepadMenu = this.parentNode;
+
+    //convert into json format as we are downloading in json format
+    let strForDownload = JSON.stringify(resource);
+    //ENCODE that json string in order to handle spaces and other signs that are not allowed in URL as href contains URL
+    let encodedData = encodeURIComponent(strForDownload);
+
+    //get the anchor tag download which contains href for the file to be download
+    let aDownload = divNotepadMenu.querySelector("a[purpose=download]");
+    //we need to set href of anchor tag to our encoded data to download it
+    aDownload.setAttribute(
+      "href",
+      "data:text/json; charset=utf-8, " + encodedData
+    );
+    //set the name of the file saved when downloaded
+    aDownload.setAttribute("download", resource.rname + ".json");
+
+    //this click event fires that anchor tag we created
+    aDownload.click();
+  }
+
+  function uploadNotepad() {
+    //get the file that was uploaded
+    let file = window.event.target.files[0];
+    //reader object is needed to read the file
+    let reader = new FileReader();
+
+    //NOTE : READ HONE SE PEHLE HUME BATANA PADTA HAI KI FILE READ HOKAR OUTPUT KAHAN DEGI(notepad app in our case), ISILIYE HUM "load" EVENT PEHLE LIKHTE HAI readAsText() KE
+
+    //as soon as we read the file we need to fire this function, this is just ATTACHING the function NOT FIRING it
+    reader.addEventListener("load", function () {
+      let data = window.event.target.result; //get data from file in string form
+      let resource = JSON.parse(data); // convert string to JSON object
+
+      //get all the buttons present in app menu bar
+      let spanBold = divAppMenuBar.querySelector("[action=bold]");
+      let spanItalic = divAppMenuBar.querySelector("[action=italic]");
+      let spanUnderline = divAppMenuBar.querySelector("[action=underline]");
+      let inputBGColor = divAppMenuBar.querySelector("[action=bg-color]");
+      let inputTextColor = divAppMenuBar.querySelector("[action=fg-color]");
+      let selectFontFamily = divAppMenuBar.querySelector(
+        "[action=font-family]"
+      );
+      let selectFontSize = divAppMenuBar.querySelector("[action=font-size]");
+      let textArea = divAppBody.querySelector("textArea");
+
+      //if bold is pressed(true) when saving the file, then
+      //1. make bold false
+      //2. dispatch event will fire the makeNotepadBold() again to change it to true again
+      spanBold.setAttribute("pressed", !resource.isBold);
+      spanItalic.setAttribute("pressed", !resource.isItalic);
+      spanUnderline.setAttribute("pressed", !resource.isUnderline);
+      inputBGColor.value = resource.bgColor;
+      inputTextColor.value = resource.textColor;
+      selectFontFamily.value = resource.fontFamily;
+      selectFontSize.value = resource.fontSize;
+      textArea.value = resource.content;
+
+      //dispatch event to presist these changes
+      //dispatchEvent(new Event("click")) fires "click" event from the program itself like user has clicked mouse button
+      spanBold.dispatchEvent(new Event("click"));
+      spanItalic.dispatchEvent(new Event("click"));
+      spanUnderline.dispatchEvent(new Event("click"));
+      inputBGColor.dispatchEvent(new Event("change"));
+      inputTextColor.dispatchEvent(new Event("change"));
+      selectFontFamily.dispatchEvent(new Event("change"));
+      selectFontSize.dispatchEvent(new Event("change"));
+    });
+    //read as text file
+    reader.readAsText(file);
   }
 
   function saveNotepad() {
@@ -515,7 +602,6 @@
 
   function saveToFolder() {}
 
-  // function to load all the folders from localStorage
   function loadFromStorage() {
     let rjson = localStorage.getItem("data"); //fetch from localstorage
     if (!rjson) {
@@ -544,6 +630,5 @@
     }
   }
 
-  // If there are any folders in the localStorage then they would be auto-populated
   loadFromStorage();
 })();

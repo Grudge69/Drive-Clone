@@ -34,6 +34,7 @@
 #breadcrumb a:hover {
   background-color: teal;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #container {
@@ -178,4 +179,21 @@
   color: blue;
 }
 
+/* we don't need to show our anchor tag for download  */
+[purpose="download"] {
+  display: none;
+}
+
 /* text-file style end */
+
+/* window actions icons start*/
+
+#win-actions span {
+  cursor: pointer;
+}
+
+#win-actions span:hover {
+  color: orange;
+}
+
+/* window actions icons end*/
