@@ -1,6 +1,8 @@
 (function () {
+  // select the html element that has an id="myFirstButton" and store in a variable called btn
   let btnAddFolder = document.querySelector("#addFolder");
   let btnAddTextFile = document.querySelector("#addTextFile");
+  //  retrieving div bread crumb from html
   let divBreadCrumb = document.querySelector("#breadcrumb");
 
   let divApp = document.querySelector("#app");
@@ -513,6 +515,7 @@
 
   function saveToFolder() {}
 
+  // function to load all the folders from localStorage
   function loadFromStorage() {
     let rjson = localStorage.getItem("data"); //fetch from localstorage
     if (!rjson) {
@@ -541,5 +544,6 @@
     }
   }
 
+  // If there are any folders in the localStorage then they would be auto-populated
   loadFromStorage();
 })();
