@@ -123,6 +123,10 @@
   width: 100%;
 }
 
+.notepad-menu input[action="upload"] {
+  display: none;
+}
+
 /* app div styling end */
 
 /* folder style start */

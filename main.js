@@ -352,6 +352,7 @@
     let selectFontFamily = divAppMenuBar.querySelector("[action=font-family]");
     let selectFontSize = divAppMenuBar.querySelector("[action=font-size]");
     let spanDownload = divAppMenuBar.querySelector("[action=download]");
+    let spanUpload = divAppMenuBar.querySelector("[action=forupload]");
     let inputUpload = divAppMenuBar.querySelector("[action=upload]");
     let textArea = divAppBody.querySelector("textArea");
 
@@ -364,8 +365,12 @@
     inputTextColor.addEventListener("change", changeNotepadTextColor);
     selectFontFamily.addEventListener("change", changeNotepadFontFamily);
     selectFontSize.addEventListener("change", changeNotepadFontSize);
-    spanDownload.addEventListener("click", downloadNotepad);
+    spanDownload.addEventListener("click", downloadNotepad); //upload icon
     inputUpload.addEventListener("change", uploadNotepad);
+    //on clicking upload icon this input upload's click event is triggered so
+    spanUpload.addEventListener("click", function () {
+      inputUpload.click();
+    });
 
     //setting initial values according to the data we have present in storage
     //if it was bold earlier then it will be bold again on clicking view as the changes were saved
