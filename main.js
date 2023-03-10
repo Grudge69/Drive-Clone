@@ -12,7 +12,7 @@
   let appClose = document.querySelector("#app-close");
 
   let aRootPath = divBreadCrumb.querySelector("a[purpose='path']");
-  let divContainer = document.querySelector("#container");
+  let divContainer = document.querySelector("#iconContainer");
   let templates = document.querySelector("#templates");
   let resources = [];
   let cfid = -1; // initially we are at root = -1
