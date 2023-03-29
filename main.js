@@ -34,6 +34,9 @@
 
   function addFolder() {
     let rname = prompt("Enter folder's name");
+
+    if(rname == null) return;
+
     if (rname != null) rname = rname.trim();
 
     if (!rname) {
@@ -66,6 +69,9 @@
 
   function addTextFile() {
     let rname = prompt("Enter text-file's name");
+
+    if(rname == null) return;
+
     if (rname != null) rname = rname.trim();
 
     if (!rname) {
@@ -106,6 +112,9 @@
 
   function addAlbum() {
     let rname = prompt("Enter album's name");
+
+    if(rname == null) return;
+    
     if (rname != null) rname = rname.trim();
 
     if (!rname) {
