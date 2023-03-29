@@ -20,9 +20,11 @@
   --white: white;
   --black: black;
   --tomato: tomato;
+  --orange: orange;
   --teal: teal;
   --blue: blue;
   --red: red;
+  --springGreen: springgreen;
 
   --lightGray: #f2f2f2;
   --shadowGray: #636e72;
@@ -38,7 +40,7 @@
 #wrapper {
   width: 100vw;
   height: 100vh;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +54,7 @@
 
 /* add buttons section */
 #header {
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -126,6 +128,7 @@
   background-color: var(--tomato);
   padding: 10px;
   border-right: 5px solid var(--black);
+  color: var(--white);
 }
 
 #breadcrumb a:hover {
@@ -140,12 +143,17 @@
   margin: 10px;
   padding: 10px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
 /* Notepad area*/
 #app {
   border: 5px solid var(--blue);
   margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 #app-title-bar {
@@ -168,9 +176,9 @@
 }
 
 #app-body {
+  flex: 1;
   display: flex;
-  background-color: springgreen;
-  height: 500px;
+  background-color: var(--springGreen);
 }
 
 .notepad-menu {
@@ -229,8 +237,6 @@
 .folder {
   background-color: var(--teal);
   color: var(--white);
-  height: 120px;
-  width: 150px;
   margin: 10px;
   padding: 10px;
 
@@ -255,8 +261,6 @@
 .text-file {
   background-color: var(--lightCoral);
   color: var(--white);
-  height: 120px;
-  width: 150px;
   margin: 10px;
   padding: 10px;
 
@@ -288,8 +292,6 @@
 .album {
   background-color: var(--vb-cyan);
   color: var(--white);
-  height: 120px;
-  width: 150px;
   margin: 10px;
   padding: 10px;
 
@@ -397,11 +399,21 @@
 }
 
 /* window actions icons start*/
+#win-actions {
+  display: flex;
+  gap: 0.5rem;
+}
 
 #win-actions span {
   cursor: pointer;
 }
 
 #win-actions span:hover {
-  color: orange;
+  color: var(--orange);
+}
+
+#workingArea {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  flex: 1;
 }
