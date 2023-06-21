@@ -36,13 +36,12 @@
 
 /* main container class */
 #wrapper {
-  width: 100vw;
-  height: 100vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--lightGray);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 8fr;
+  grid-template-areas:
+    "header breadcrumb"
+    "header workingArea";
 }
 
 #wrapper > * {
@@ -52,10 +51,11 @@
 
 /* add buttons section */
 #header {
+  grid-area: header;
   margin: 10px;
   padding: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
@@ -117,6 +117,7 @@
 
 /* Breadcrumb view section */
 #breadcrumb {
+  grid-area: breadcrumb;
   border: 1px solid var(--black);
   margin: 10px;
   display: flex;
@@ -132,6 +133,10 @@
   background-color: var(--teal);
   text-decoration: underline;
   cursor: pointer;
+}
+
+#workingArea {
+  grid-template-areas: workingArea;
 }
 
 /* Container for folder, text file icons */
@@ -398,4 +403,10 @@
 
 #win-actions span:hover {
   color: orange;
+}
+
+@media screen and (min-width: 1130px) {
+  #wrapper {
+    grid-template-columns: 1fr 4fr;
+  }
 }
