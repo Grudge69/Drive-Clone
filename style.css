@@ -46,7 +46,6 @@
 }
 
 #wrapper > * {
-  width: 95%;
   overflow-x: auto;
 }
 
@@ -114,21 +113,35 @@
 /* Breadcrumb view section */
 #breadcrumb {
   grid-area: breadcrumb;
-  border: 1px solid var(--black);
-  margin: 10px;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid var(--lightGray);
+  padding-inline: 1rem;
 }
 
 #breadcrumb a {
-  background-color: var(--tomato);
-  padding: 10px;
-  border-right: 5px solid var(--black);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.5rem;
+}
+
+#breadcrumb a::after {
+  content: ">";
+  position: absolute;
+  right: -1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 #breadcrumb a:hover {
-  background-color: var(--teal);
-  text-decoration: underline;
   cursor: pointer;
+}
+
+#rootFolderIcon {
+  width: 1.5rem;
 }
 
 #workingArea {
