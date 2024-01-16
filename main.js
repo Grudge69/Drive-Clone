@@ -35,7 +35,7 @@
   function addFolder() {
     let rname = prompt("Enter folder's name");
 
-    if(rname == null) return;
+    if (rname == null) return;
 
     if (rname != null) rname = rname.trim();
 
@@ -70,7 +70,7 @@
   function addTextFile() {
     let rname = prompt("Enter text-file's name");
 
-    if(rname == null) return;
+    if (rname == null) return;
 
     if (rname != null) rname = rname.trim();
 
@@ -113,8 +113,8 @@
   function addAlbum() {
     let rname = prompt("Enter album's name");
 
-    if(rname == null) return;
-    
+    if (rname == null) return;
+
     if (rname != null) rname = rname.trim();
 
     if (!rname) {
@@ -353,7 +353,8 @@
     //get span view of the folder whose view button was clicked
     let spanView = this;
     //spanView's parentNode is the folder inside which the button is
-    let divFolder = spanView.parentNode;
+    let divFolder = spanView.closest(".folder");
+
     //get the divName from the folder
     let divName = divFolder.querySelector("[purpose='name']");
 
@@ -432,8 +433,8 @@
 
   function viewTextFile() {
     let spanView = this;
-    let divTextFile = spanView.parentNode;
-    let divName = divTextFile.querySelector("[purpose=name]");
+    let divTextFile = spanView.closest(".text-file");
+    let divName = divTextFile.querySelector("[purpose='name']");
     let fname = divName.innerHTML;
     let fid = parseInt(divTextFile.getAttribute("rid"));
 
@@ -512,8 +513,8 @@
 
   function viewAlbum() {
     let spanView = this;
-    let divAlbum = spanView.parentNode;
-    let divName = divAlbum.querySelector("[purpose=name]");
+    let divAlbum = spanView.closest(".album");
+    let divName = divAlbum.querySelector("[purpose='name']");
     let fname = divName.innerHTML;
     let fid = parseInt(divAlbum.getAttribute("rid"));
 
@@ -802,7 +803,7 @@
       return;
     }
 
-    resources = JSON.parse(rjson); //convert json string to javascript object/array of jso
+    resources = JSON.parse(rjson); //convert json string to javascript object/array of json
     for (let i = 0; i < resources.length; i++) {
       if (resources[i].pid == cfid) {
         if (resources[i].rtype == "folder") {

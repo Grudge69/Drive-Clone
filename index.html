@@ -26,8 +26,12 @@
       <div id="header">
         <div class="logo">
           <img src="./assets/folder-icon-no-bg.png" alt="logo" />
-          <div class="logo-text-1">DOCDRIVE</div>
-          <div class="logo-text-2">File management, driven to perfection.</div>
+          <div class="logo-text">
+            <div class="logo-text-1">DOCDRIVE</div>
+            <div class="logo-text-2">
+              File management, driven to perfection.
+            </div>
+          </div>
         </div>
 
         <div class="btns">
@@ -115,25 +119,39 @@
         </div>
         <a purpose="path" rid="-1"></a>
         <div purpose="notepad-menu" class="notepad-menu">
-          <span action="save" class="material-icons">save</span>
-          <span pressed="false" action="bold" class="material-icons"
+          <span action="save" class="material-icons" title="Save File"
+            >save</span
+          >
+          <span
+            pressed="false"
+            action="bold"
+            class="material-icons"
+            title="Bold Text"
             >format_bold</span
           >
-          <span pressed="false" action="italic" class="material-icons"
+          <span
+            pressed="false"
+            action="italic"
+            class="material-icons"
+            title="Italic Text"
             >format_italic</span
           >
-          <span pressed="false" action="underline" class="material-icons"
+          <span
+            pressed="false"
+            action="underline"
+            class="material-icons"
+            title="Underline Text"
             >format_underline</span
           >
-          <input type="color" action="bg-color" />
-          <input type="color" action="fg-color" />
-          <select action="font-family">
+          <input type="color" action="bg-color" title="Background Color" />
+          <input type="color" action="fg-color" title="Text Color" />
+          <select action="font-family" title="Select Font Family">
             <option value="monospace">monospace</option>
             <option value="serif">serif</option>
             <option value="sans-serif">sans-serif</option>
             <option value="cursive">cursive</option>
           </select>
-          <select action="font-size">
+          <select action="font-size" title="Select Font Size">
             <option value="8">8</option>
             <option value="10">10</option>
             <option value="12">12</option>
@@ -143,8 +161,12 @@
             <option value="20">20</option>
             <option value="22">22</option>
           </select>
-          <span action="download" class="material-icons">download</span>
-          <span action="forupload" class="material-icons">upload</span>
+          <span action="download" class="material-icons" title="Download File"
+            >download</span
+          >
+          <span action="forupload" class="material-icons" title="Upload File"
+            >upload</span
+          >
           <input action="upload" type="file" />
           <a purpose="download" href="http://www.google.com" target="_blank"
             >Link</a
@@ -154,27 +176,39 @@
           <textarea>I am the notepad's body</textarea>
         </div>
         <div purpose="album-menu" class="album-menu">
-          <span action="save" class="material-icons">save</span>
-          <span action="download" class="material-icons">download</span>
-          <span action="upload" class="material-icons">upload</span>
+          <span action="save" class="material-icons" title="Save File"
+            >save</span
+          >
+          <span action="download" class="material-icons" title="Download File"
+            >download</span
+          >
+          <span action="upload" class="material-icons" title="Upload File"
+            >upload</span
+          >
 
-          <span action="add" class="material-icons">add</span>
-          <span action="delete" class="material-icons">delete</span>
-          <span action="left" class="material-icons"
+          <span action="add" class="material-icons" title="Add Image URL"
+            >add</span
+          >
+          <span action="delete" class="material-icons" title="Delete File"
+            >delete</span
+          >
+          <span action="left" class="material-icons" title="Previous"
             >keyboard_double_arrow_left</span
           >
-          <span action="right" class="material-icons"
+          <span action="right" class="material-icons" title="Next"
             >keyboard_double_arrow_right</span
           >
 
-          <span action="play" class="material-icons">play_arrow</span>
-          <span action="pause" class="material-icons">pause</span>
+          <span action="play" class="material-icons" title="Play"
+            >play_arrow</span
+          >
+          <span action="pause" class="material-icons" title="Pause">pause</span>
         </div>
         <div purpose="album-body" class="album-body">
           <div class="picture-list"></div>
           <div class="picture-view">
             <div class="move-left">
-              <span action="left" class="material-icons"
+              <span action="left" class="material-icons" title="Go Previous"
                 >keyboard_double_arrow_left</span
               >
             </div>
@@ -182,7 +216,7 @@
               <img src="" alt="Please select an image" />
             </div>
             <div class="move-right">
-              <span action="right" class="material-icons"
+              <span action="right" class="material-icons" title="Go Next"
                 >keyboard_double_arrow_right</span
               >
             </div>
